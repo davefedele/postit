@@ -1,10 +1,5 @@
 <h4> Edit category</h4>
 
-<%= render 'shared/errors' %>
+<%= render 'shared/errors', object: @category %>
 
-<%= form_for @category do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <br/>
-  <%= f.submit 'Edit Category', class: "btn btn-primary" %>
-<% end%>
+<%= render 'form' %>
