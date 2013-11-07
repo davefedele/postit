@@ -9,4 +9,27 @@
 </p>
 <hr/>
 
+<%= render 'shared/errors', object: @comment %>
+
+<%= form_for [@post, @post.comments.build] do |f| %>
+  <%= f.text_area :body %>
+  <br/>
+  <%= f.submit "Submit Comment", class: 'btn btn-primary' %>
+<% end %>
+
+<% @post.comments.reload %>
+
+<% @post.comments.each do |comment| %>
+  <div class="row">
+    <div class="span8 well">
+      <p> <%= comment.body %></p>  
+      <p>
+        <span class="quiet">posted by </span> USER 
+        <small> at <%= comment.created_at %></small>
+        <span>
+       </p>
+    </div>
+  </div>
+<% end %>
+
 <%= link_to 'return to all posts', posts_path %>
