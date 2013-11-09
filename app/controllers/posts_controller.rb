@@ -5,9 +5,7 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
-  def show
-    @comment = Comment.new
-  end
+  def show; end
 
   def new
     @post = Post.new
@@ -15,6 +13,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.creator = User.first # TODO: change after we add authentication
 
     if @post.save
       flash[:notice] = "The post was created."
@@ -24,8 +23,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @post.update(post_params)
@@ -38,11 +36,11 @@ class PostsController < ApplicationController
   
   private
 
-  def post_params
-    params.require(:post).permit(:title, :url, :creator)
-  end
+    def post_params
+      params.require(:post).permit(:title, :url, :description)
+    end
 
-  def set_post
-    @post = Post.find(params[:id ])    
-  end
+    def set_post
+      @post = Post.find(params[:id ])    
+    end
 end
