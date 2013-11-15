@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :require_user
   
   def create
     @post = Post.find(params[:post_id]) #had to set up parent object in nested relationship
@@ -8,8 +9,7 @@ class CommentsController < ApplicationController
     # @comment = Comment.new(params[:comment].permit(:body))
     # @comment.post = @post
 
-    # set user - temporary until add oath
-    @comment.creator = User.first
+    @comment.creator = current_user
 
     if @comment.save
       flash[:notice] = "Your comment was added."
