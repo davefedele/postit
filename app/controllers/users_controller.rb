@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      session[:user_id] = @user.id
       flash[:notice] = "You are registered."
       redirect_to root_path
     else
@@ -26,6 +27,15 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @post = @user.posts
+  end
+
+  def edit
+    @user = User.find(params[:id])
   end
 
   private

@@ -1,0 +1,28 @@
+<%= render 'shared/content_title', title: "View your profile" %>
+
+<div class="well">
+  <h5>Username: <%= current_user.username %><h5>
+</div>
+
+<%= render 'shared/content_title', title: "#{current_user.username}'s activity" %>
+
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs">
+    <li class="active">
+      <a href="#lA" data-toggle="tab">Posts</a>      
+    </li>
+    <li class>
+      <a href="#lB" data-toggle="tab">Comments</a>
+    </li>  
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="lA">
+      <% current_user.posts.each do |post| %>
+        <%= render 'posts/post', post: post %>
+      <% end %>
+    </div>
+    <div class="tab-pane" id="lB">
+      <%= render 'comments/comment' %>
+    </div>
+  </div>
+</div>

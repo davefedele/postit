@@ -4,8 +4,6 @@ class Comment < ActiveRecord::Base
   validates   :body, presence: true
   has_many    :votes, as: :voteable
 
-  validates_uniqueness_of :creator, scope: :voteable
-
   def total_votes
     up_votes - down_votes
   end
