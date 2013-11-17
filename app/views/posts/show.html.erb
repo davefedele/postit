@@ -28,32 +28,4 @@
 
 <h5> Comments:</h5>
 
-<% @post.comments.each do |comment| %>
-  
-  <div class="span0 well text-center">
-    <% if logged_in? %>
-      <%= link_to vote_post_comment_path(@post, comment, vote: true), method: 'post' do %>
-      <i class="icon-arrow-up"></i>
-      <% end %>
-    <% end %>
-    </br>
-    <%= comment.total_votes %>
-    </br>
-    <% if logged_in? %>
-      <%= link_to vote_post_comment_path(@post, comment, vote: false), method: 'post' do %>
-        <i class="icon-arrow-down"></i>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="row">
-    <div class="well span8">
-      <em>"<%= comment.body %>"</em>  
-      <p>
-        <span class="quiet">by </span><%= comment.creator.username %>
-        <small> at <%= display_datetime(comment.created_at) %></small>
-        <span>
-       </p>
-    </div>
-  </div>
-<% end %>
+<%= render 'comments/comment', object: @post %>
