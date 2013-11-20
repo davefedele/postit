@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :require_user
   
   def create
-    @post = Post.find(params[:post_id]) #had to set up parent object in nested relationship
+    @post = Post.find_by(slug: params[:post_id]) #had to set up parent object in nested relationship
     
     # line 7 replaces lines 8 and 9
     @comment = @post.comments.build(params.require(:comment).permit(:body))
