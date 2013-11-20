@@ -1,4 +1,8 @@
-<% if logged_in? %>
+<% if logged_in? && current_user.admin? %>
+  <p class="pull-right">
+    [<%= link_to "edit this post", edit_post_path(@post) %>]
+  </p>
+<% elsif logged_in? && current_user.id == @post.user_id%>
   <p class="pull-right">
     [<%= link_to "edit this post", edit_post_path(@post) %>]
   </p>
