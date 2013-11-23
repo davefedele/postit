@@ -1,4 +1,4 @@
-<% object.comments.each do |comment| %>
+<% object.comments.sort_by{|x| x.total_votes}.reverse.each do |comment| %>
   
   <div class="span0 well text-center">
     <% if logged_in? %>
