@@ -8,6 +8,12 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
+    respond_to do |format|
+      format.html
+      format.json { render json: @post }
+      format.xml { render xml: @post}
+    end 
+
   end
 
   def new
@@ -40,15 +46,16 @@ class PostsController < ApplicationController
   def vote
     @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
 
-    # if @vote.valid?
-    #   flash[:notice] = "Your vote vas counted."
-    # else
-    #   flash[:error] = "You can only vote for '#{@post.title}' once."
-    # end
-
     respond_to do |format|
-      format.html {redirect_to :back, notice: "Your vote was counted."}
-      format.js {}
+      format.html do
+        if @vote.valid?
+          flash[:notice] = "Your vote was counted."
+        else
+          flash[:error] = "Your can only vote one a post once."
+        end
+        redirect_to :back
+      end
+      format.js{}
     end
   end
   
