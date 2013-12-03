@@ -14,6 +14,9 @@
 
 <%= render 'shared/content_title', title: @post.title %>
 
+<h5><small><%= link_to fix_url(@post.url), fix_url(@post.url), target: "_blank" %></small></h5>
+<br/>
+
 <p>
   <%= @post.description %>
 </p>
